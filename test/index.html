@@ -1,48 +1,22 @@
+<!DOCTYPE HTML>
 <html>
-<head>
-</head>
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+    <title>Bar Code Scanner</title>
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <script type="text/javascript" src="main.js"></script>
 
-<script>
-function getcities(l){
-cc=l.split('name":"');
-
- var select=document.getElementById("cities");
- select.options.length = 0;
-
- for(i=3;i<cc.length;i++){
- cit=cc[i].split('"');
-select.options[select.options.length] = new Option(cit[0], cit[0]);
-
-}
-
-}
-function getit(){
-var jqxhr = $.ajax( "http://ws.geonames.org/searchJSON?country="+$("#countries").val() )
-    .done(function() { alert("success"); 
-//	$(".result").html(jqxhr.responseText);
-getcities(jqxhr.responseText)	
-;})
-    .fail(function() { alert("error"); })
-    .always(function() { alert("complete"); });
-	}
-</script>
-<body onload="a();">
-
-<input type="button" onclick="getit();"/>
-
-<select id="countries">
-<option value="MA" >MAroc</option>
-<option value="EG" >Egypt</option>
-<option value="TU" >Tunisie</option>
-</select>
-
-<select id="cities">
-<option>select city</option>
-</select>
-
-
-<div name ="result" class="result" id="result" ></div>
-
-</body>
+  </head>
+  <body id="stage" class="theme">
+    <h1>Barcode Scanner and Encoder</h1>
+    <h2>PhoneGap Barcode Scanner Plugin</h2>
+    
+    <a href="#" class="btn" onclick="scanCode();">Scan Code</a>
+    
+    <a href="#" class="btn enc" onclick="encodeText();">Encode Text</a> 
+    <a href="#" class="btn enc" onclick="encodeEmail();">Encode Email</a>   
+    <a href="#" class="btn enc" onclick="encodePhone();">Encode Phone</a>   
+    <a href="#" class="btn enc" onclick="encodeSMS();">Encode SMS</a>   
+  </body>
 </html>
