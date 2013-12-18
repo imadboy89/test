@@ -1,0 +1,48 @@
+<html>
+<head>
+</head>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+<script>
+function getcities(l){
+cc=l.split('name":"');
+
+ var select=document.getElementById("cities");
+ select.options.length = 0;
+
+ for(i=3;i<cc.length;i++){
+ cit=cc[i].split('"');
+select.options[select.options.length] = new Option(cit[0], cit[0]);
+
+}
+
+}
+function getit(){
+var jqxhr = $.ajax( "http://ws.geonames.org/searchJSON?country="+$("#countries").val() )
+    .done(function() { alert("success"); 
+//	$(".result").html(jqxhr.responseText);
+getcities(jqxhr.responseText)	
+;})
+    .fail(function() { alert("error"); })
+    .always(function() { alert("complete"); });
+	}
+</script>
+<body onload="a();">
+
+<input type="button" onclick="getit();"/>
+
+<select id="countries">
+<option value="MA" >MAroc</option>
+<option value="EG" >Egypt</option>
+<option value="TU" >Tunisie</option>
+</select>
+
+<select id="cities">
+<option>select city</option>
+</select>
+
+
+<div name ="result" class="result" id="result" ></div>
+
+</body>
+</html>
